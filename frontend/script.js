@@ -63,14 +63,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                         const leftPage = document.createElement('div');
                         leftPage.className = 'page';
                         leftPage.innerHTML = `
-                          <div class="page-content style-content" style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%;">
-                            <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Mehak Tomar</div>
-                            <h2 class="page-title" style="font-size: 3.5rem; margin-bottom: 2rem;">${style.title}</h2>
-                            <div style="width: 30px; height: 1px; background: var(--gold); margin: 0 auto 2rem auto;"></div>
-                            <div style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Style: ${style.slug}</div>
-                            <button class="back-to-cover-btn">Cover</button>
-                          </div>
-                          <div class="page-number">${pageNum}</div>
+                            <div class="page-content style-content" style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%;">
+                                <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Mehak Tomar</div>
+                                <h2 class="page-title" style="font-size: 3.5rem; margin-bottom: 2rem;">${style.title}</h2>
+                                <div style="width: 30px; height: 1px; background: var(--gold); margin: 0 auto 2rem auto;"></div>
+                                <div style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Style: ${style.slug}</div>
+                                <button class="back-to-cover-btn">Cover</button>
+                            </div>
+                            <div class="page-number">${pageNum}</div>
                         `;
                         bookContainer.appendChild(leftPage);
                         pageNum++;
@@ -87,25 +87,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                             galleryHTML += `
                                 <a href="${img.imageUrl}" class="masonry-item" data-pswp-width="${w}" data-pswp-height="${h}" target="_blank">
-                                  <img src="${img.imageUrl}" alt="${style.title} Portrait" loading="lazy" />
+                                    <img src="${img.imageUrl}" alt="${style.title} Portrait" loading="lazy" />
                                 </a>
                             `;
                         });
                         rightPage.innerHTML = `
-                          <div class="page-content">
-                            <div class="masonry-gallery" id="gallery-${style.slug}">
-                              ${galleryHTML}
+                            <div class="page-content">
+                                <div class="masonry-gallery" id="gallery-${style.slug}">
+                                    ${galleryHTML}
+                                </div>
                             </div>
-                          </div>
-                          <div class="page-number">${pageNum}</div>
+                            <div class="page-number">${pageNum}</div>
                         `;
                         bookContainer.appendChild(rightPage);
                         pageNum++;
                     }
                 }
 
-                // Ensure even number of pages for the book format 
-                // (StPageFlip prefers even number of total pages)
                 if (bookContainer.children.length % 2 !== 0) {
                     const emptyPage = document.createElement('div');
                     emptyPage.className = 'page';
@@ -114,20 +112,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
 
-            // 3. Init StPageFlip
-            // Calculate responsive dimensions
             const vw = window.innerWidth;
             const vh = window.innerHeight;
 
-            // Responsive dimensions: 1 page width and height
             let bookWidth = 0;
-            let bookHeight = vh * 0.85; // 85% of screen height
+            let bookHeight = vh * 0.85;
 
             if (vw >= 768) {
-                // Desktop: Book should be wide enough for spread but not clip
                 bookWidth = Math.min(vw * 0.45, 600);
             } else {
-                // Mobile: Book should fill width
                 bookWidth = vw * 0.95;
             }
 
@@ -143,14 +136,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 maxShadowOpacity: 0.8,
                 showCover: true,
                 mobileScrollSupport: true,
-                usePortrait: true, // Auto-switches to single page on narrow screens
+                usePortrait: true,
                 flippingTime: 1000,
                 swipeDistance: 30
             });
 
             pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
-            // Show nav buttons on desktop
             if (vw >= 768) {
                 prevBtn.classList.remove('hidden');
                 nextBtn.classList.remove('hidden');
@@ -163,29 +155,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Open Lookbook transition
     openBookBtn.addEventListener('click', async () => {
         openBookBtn.style.pointerEvents = 'none';
         openBookBtn.innerHTML = '<span class="btn-text">Opening...</span>';
 
-        // Start fetching data in background only if not already initialized
         if (!pageFlip) {
             await initLookbook();
         }
 
-        // Transition
         loaderView.style.display = 'flex';
-        // force reflow
         void loaderView.offsetWidth;
         loaderView.classList.add('fade-out');
         bookContainer.classList.remove('hidden');
 
         setTimeout(() => {
             loaderView.style.display = 'none';
-        }, 1000); // 1s matches CSS transition
+        }, 1000);
     });
 
-    // Navigation Button events
     prevBtn.addEventListener('click', () => {
         if (pageFlip) pageFlip.flipPrev();
     });
@@ -194,15 +181,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (pageFlip) pageFlip.flipNext();
     });
 
-    // Close lookbook / Back to cover
     document.addEventListener('click', (e) => {
         if (e.target.closest('.back-to-cover-btn')) {
             loaderView.style.display = 'flex';
-            // force reflow
             void loaderView.offsetWidth;
             loaderView.classList.remove('fade-out');
 
-            // Hide nav buttons
             prevBtn.classList.add('hidden');
             nextBtn.classList.add('hidden');
 
@@ -211,10 +195,47 @@ document.addEventListener('DOMContentLoaded', async () => {
                 openBookBtn.style.pointerEvents = 'auto';
                 openBookBtn.innerHTML = '<span class="btn-text">Open Portfolio</span>';
                 if (pageFlip) {
-                    pageFlip.turnToPage(0); // reset book to start
+                    pageFlip.turnToPage(0);
                 }
             }, 1000);
         }
     });
+
+    // --- Custom Cursor Logic (Option 1) ---
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let outlineX = 0;
+    let outlineY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursorDot.style.left = mouseX + 'px';
+        cursorDot.style.top = mouseY + 'px';
+
+        const target = e.target;
+        const isInteractive = target.closest('button, a, .page-item, .nav-btn, .image-card, [role="button"]');
+        if (isInteractive) {
+            document.body.classList.add('cursor-hover');
+        } else {
+            document.body.classList.remove('cursor-hover');
+        }
+    });
+
+    function animateCursor() {
+        const lerpFactor = 0.15;
+        outlineX += (mouseX - outlineX) * lerpFactor;
+        outlineY += (mouseY - outlineY) * lerpFactor;
+
+        cursorOutline.style.left = outlineX + 'px';
+        cursorOutline.style.top = outlineY + 'px';
+
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
 
 });

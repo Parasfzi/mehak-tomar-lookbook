@@ -13,6 +13,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none !important;
+}
+
+@media (max-width: 1024px) {
+    * {
+        cursor: auto !important;
+    }
 }
 
 body {
@@ -452,5 +459,60 @@ body {
         margin-bottom: 2rem;
     }
 
-    .footer-text { font-size: 0.6rem !important; bottom: 1rem !important; letter-spacing: 1px !important; padding: 0 1rem; }
+    .footer-text {
+        font-size: 0.6rem !important;
+        bottom: 1rem !important;
+        letter-spacing: 1px !important;
+        padding: 0 1rem;
+    }
+}
+
+/* Custom Cursor Styling */
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--gold);
+    box-shadow: 0 0 10px var(--gold-glow);
+    z-index: 10000;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gold);
+    transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s, opacity 0.3s;
+    z-index: 9999;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+/* Hover States */
+body.cursor-hover .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(201, 169, 110, 0.1);
+    border-color: var(--gold-glow);
+}
+
+body.cursor-hover .cursor-dot {
+    opacity: 0;
+}
+
+/* Hide on Mobile */
+@media (max-width: 1024px) {
+
+    .cursor-dot,
+    .cursor-outline {
+        display: none !important;
+    }
 }
