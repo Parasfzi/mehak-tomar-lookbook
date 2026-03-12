@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const manageImagesModal = document.getElementById('manage-images-modal');
     const closeModals = document.querySelectorAll('.close-modal');
 
+    // Mobile Menu Elements
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarLinks = document.querySelectorAll('.nav-links a');
+
     let currentStyles = [];
     let sortableStyles;
     let sortableImages;
@@ -82,6 +88,22 @@ document.addEventListener('DOMContentLoaded', () => {
         dashboardSection.classList.remove('hidden');
         loadStyles();
     }
+
+    // --- Mobile Menu Interaction ---
+    function toggleMobileMenu() {
+        sidebar.classList.toggle('active');
+    }
+
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    sidebarOverlay.addEventListener('click', toggleMobileMenu);
+
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (sidebar.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+    });
 
     // --- Styles Logic ---
     async function loadStyles() {

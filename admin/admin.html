@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard | Mehak Tomar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="admin.css">
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
+
 <body>
 
   <!-- Login Section -->
@@ -33,7 +37,20 @@
 
   <!-- Dashboard Section -->
   <section id="dashboard-section" class="screen hidden">
-    <nav class="sidebar">
+    <!-- Mobile Menu Toggle -->
+    <button id="mobile-menu-btn" class="mobile-menu-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <nav class="sidebar" id="sidebar">
       <div class="logo">Mehak <span>Admin</span></div>
       <ul class="nav-links">
         <li><a href="#" class="active" data-view="styles">Styles & Images</a></li>
@@ -44,14 +61,14 @@
       <header>
         <h2>Dashboard</h2>
       </header>
-      
+
       <!-- Styles View -->
       <div id="view-styles" class="view">
         <div class="header-actions">
           <h3>Manage Styles</h3>
           <button id="add-style-btn" class="btn btn-outline">Add New Style</button>
         </div>
-        
+
         <div class="add-style-form hidden" id="style-form-container">
           <input type="text" id="new-style-title" placeholder="e.g. Bridal Portraits">
           <input type="text" id="new-style-slug" placeholder="e.g. bridal-portraits">
@@ -95,7 +112,7 @@
         <h3 id="manage-images-title">Images</h3>
         <button class="close-modal btn btn-text">Close</button>
       </div>
-      
+
       <div class="upload-area" id="upload-area">
         <input type="file" id="image-upload-input" accept="image/*" multiple hidden>
         <button id="trigger-upload-btn" class="btn btn-primary">Upload Images (Select or Drag&Drop)</button>
@@ -110,4 +127,5 @@
 
   <script src="admin.js"></script>
 </body>
+
 </html>
