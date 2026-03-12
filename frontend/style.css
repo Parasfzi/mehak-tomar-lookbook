@@ -311,15 +311,15 @@ body {
 }
 
 .page-number {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute !important;
+    bottom: 1.5rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     text-align: center;
     font-size: 1rem;
-    color: var(--gold);
+    color: var(--gold) !important;
     font-family: var(--font-heading);
-    z-index: 20;
+    z-index: 100 !important;
     pointer-events: none;
     letter-spacing: 2px;
 }

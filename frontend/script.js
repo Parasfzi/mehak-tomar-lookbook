@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div style="width: 50px; height: 1px; background: var(--gold); margin: 2rem auto;"></div>
                         <div style="font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Cinematic Portraits</div>
                     </div>
+                    <div class="page-number">0</div>
                 `;
                 bookContainer.appendChild(coverPage);
 
