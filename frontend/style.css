@@ -269,10 +269,14 @@ body {
 
 .page-content {
     /* Generous luxury editorial margins */
-    padding: 4rem 3rem;
+    padding: 4rem 3rem 6rem 3rem;
+    /* bottom padding for page number */
     height: 100%;
     position: relative;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
     /* Allow scrolling within page if masonry is long */
     overscroll-behavior: contain;
     touch-action: pan-y;
@@ -301,17 +305,19 @@ body {
     font-size: 3rem;
     font-weight: 300;
     color: var(--gold);
-    margin-bottom: 2.5rem;
-    text-align: center;
-    letter-spacing: 2px;
-}
 
-.page-number {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.1rem;
+    .page-number {
+        position: static;
+        margin: 2rem auto 0 auto;
+        text-align: center;
+        font-size: 1rem;
+        color: var(--gold);
+        font-family: var(--font-heading);
+        z-index: 10;
+        pointer-events: none;
+        letter-spacing: 2px;
+    }
+
     color: var(--gold);
     font-family: var(--font-heading);
     z-index: 10;
