@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <h2 class="page-title" style="font-size: 3.5rem; margin-bottom: 2rem;">${style.title}</h2>
                             <div style="width: 30px; height: 1px; background: var(--gold); margin: 0 auto 2rem auto;"></div>
                             <div style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Style: ${style.slug}</div>
-                            <div class="page-number">${pageNum}</div>
                             <button class="back-to-cover-btn">Cover</button>
                           </div>
+                          <div class="page-number">${pageNum}</div>
                         `;
                         bookContainer.appendChild(leftPage);
                         pageNum++;
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <div class="masonry-gallery" id="gallery-${style.slug}">
                               ${galleryHTML}
                             </div>
-                            <div class="page-number">${pageNum}</div>
                           </div>
+                          <div class="page-number">${pageNum}</div>
                         `;
                         bookContainer.appendChild(rightPage);
                         pageNum++;
