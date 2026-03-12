@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Mehak Tomar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+</head>
+<body>
+
+  <!-- Login Section -->
+  <section id="login-section" class="screen">
+    <div class="login-card">
+      <h1 class="logo">MT <span>Admin</span></h1>
+      <form id="login-form">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p id="login-error" class="error-msg"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard-section" class="screen hidden">
+    <nav class="sidebar">
+      <div class="logo">Mehak <span>Admin</span></div>
+      <ul class="nav-links">
+        <li><a href="#" class="active" data-view="styles">Styles & Images</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+      <header>
+        <h2>Dashboard</h2>
+      </header>
+      
+      <!-- Styles View -->
+      <div id="view-styles" class="view">
+        <div class="header-actions">
+          <h3>Manage Styles</h3>
+          <button id="add-style-btn" class="btn btn-outline">Add New Style</button>
+        </div>
+        
+        <div class="add-style-form hidden" id="style-form-container">
+          <input type="text" id="new-style-title" placeholder="e.g. Bridal Portraits">
+          <input type="text" id="new-style-slug" placeholder="e.g. bridal-portraits">
+          <button id="save-style-btn" class="btn">Save</button>
+          <button id="cancel-style-btn" class="btn btn-text">Cancel</button>
+        </div>
+
+        <ul id="styles-list" class="styles-list sortable-list">
+          <!-- Dynamically populated -->
+        </ul>
+      </div>
+
+    </main>
+  </section>
+
+  <!-- Modals -->
+  <!-- Edit Style Modal -->
+  <div id="edit-style-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Edit Style</h3>
+      <input type="hidden" id="edit-style-id">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="edit-style-title">
+      </div>
+      <div class="form-group">
+        <label>Slug</label>
+        <input type="text" id="edit-style-slug">
+      </div>
+      <div class="modal-actions">
+        <button id="save-edit-style-btn" class="btn btn-primary">Update</button>
+        <button class="btn btn-text close-modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manage Images Modal -->
+  <div id="manage-images-modal" class="modal hidden fullscreen-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="manage-images-title">Images</h3>
+        <button class="close-modal btn btn-text">Close</button>
+      </div>
+      
+      <div class="upload-area" id="upload-area">
+        <input type="file" id="image-upload-input" accept="image/*" multiple hidden>
+        <button id="trigger-upload-btn" class="btn btn-primary">Upload Images (Select or Drag&Drop)</button>
+        <div class="upload-progress hidden" id="upload-progress">Uploading...</div>
+      </div>
+
+      <div class="images-grid sortable-grid" id="images-grid">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

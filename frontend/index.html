@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehak Tomar | Portrait Lookbook</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- PhotoSwipe CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.2.2/dist/photoswipe.css">
+
+    <link rel="stylesheet" href="style.css?v=16">
+</head>
+
+<body>
+
+    <!-- Background overlay details -->
+    <div class="luxury-bg"></div>
+
+    <!-- Main Book Container -->
+    <div class="book-wrapper">
+        <button id="prev-page-btn" class="nav-btn nav-btn-left hidden">‹</button>
+        <div id="book" class="flip-book hidden">
+            <!-- Pages will be dynamically injected here -->
+        </div>
+        <button id="next-page-btn" class="nav-btn nav-btn-right hidden">›</button>
+    </div>
+
+    <!-- Cover Loader Initial View -->
+    <div id="loader-view" class="loader-view">
+        <div class="cover-content">
+            <h1 class="title">Mehak Tomar</h1>
+            <h2 class="subtitle">Portrait Lookbook</h2>
+            <p class="description">A cinematic editorial collection of makeup artistry and fine portraits.</p>
+
+            <button id="open-book-btn" class="btn-luxury">
+                <span class="btn-text">Open Lookbook</span>
+            </button>
+
+            <div class="footer-text">Digital Lookbook Concept by Paras Pawar</div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="spinner-container hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Templates -->
+    <template id="style-page-template">
+        <div class="page page-cover page-cover-top" data-density="hard">
+            <div class="page-content style-content">
+                <h2 class="page-title">{TITLE}</h2>
+                <div class="masonry-gallery" id="gallery-{SLUG}">
+                    <!-- Images go here -->
+                </div>
+                <div class="page-number">{PAGE_NUM}</div>
+            </div>
+        </div>
+    </template>
+
+
+    <!-- Scripts -->
+    <!-- StPageFlip -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+
+    <!-- PhotoSwipe Module (Import map or module via JS) -->
+    <script type="module" src="script.js?v=16"></script>
+</body>
+
+</html>

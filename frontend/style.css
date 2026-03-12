@@ -1,0 +1,434 @@
+:root {
+    --bg-dark: #0f0f0f;
+    --bg-book: #151515;
+    --gold: #c9a96e;
+    --gold-glow: rgba(201, 169, 110, 0.4);
+    --text-light: #f9f6f1;
+    --text-muted: #aaa;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    overflow: hidden;
+    /* Prevent body scroll, everything happens inside the book/viewer */
+    -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Subtle Background Effect */
+.luxury-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba(30, 30, 30, 1) 0%, rgba(15, 15, 15, 1) 100%);
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* Cover / Loader View */
+.loader-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 100;
+    background: var(--bg-dark);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.loader-view.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.05);
+    /* cinematic zoom out */
+}
+
+.cover-content {
+    max-width: 600px;
+    padding: 2rem;
+    animation: fadeIn 2s ease-out;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+}
+
+.btn-luxury {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 1rem 3rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.btn-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    z-index: 0;
+}
+
+.btn-luxury:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.btn-luxury:hover {
+    color: #000;
+    box-shadow: 0 0 15px var(--gold-glow);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-text {
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: 100%;
+    font-size: 0.8rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Book Container */
+.book-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    perspective: 1200px;
+}
+
+.flip-book {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 100px rgba(0, 0, 0, 0.5);
+    /* Enhanced depth for realism */
+    position: relative;
+    max-width: 90vw;
+    /* allow it to grow but not hit edges */
+    margin: auto;
+}
+
+/* Hardcover Spine effect */
+.flip-book::before {
+    content: '';
+    position: absolute;
+    top: -1%;
+    bottom: -1%;
+    left: calc(50% - 15px);
+    width: 30px;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(255, 255, 255, 0.05) 20%,
+            rgba(0, 0, 0, 1) 50%,
+            rgba(255, 255, 255, 0.05) 80%,
+            rgba(0, 0, 0, 0.9) 100%);
+    box-shadow: inset 0 0 15px #000;
+    z-index: 0;
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .flip-book::before {
+        display: none;
+    }
+}
+
+/* Navigation Buttons */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 15, 15, 0.6);
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    color: var(--gold);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 50;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(4px);
+}
+
+.nav-btn:hover {
+    background: rgba(201, 169, 110, 0.1);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px var(--gold-glow);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn-left {
+    left: 2rem;
+}
+
+.nav-btn-right {
+    right: 2rem;
+}
+
+/* Page Styles within Book */
+.page {
+    /* Subtle luxury paper texture */
+    background: linear-gradient(135deg, #181818 0%, #0d0d0d 100%);
+    color: var(--text-light);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    /* Base paper edge thickness illusion */
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7), inset 0 0 5px rgba(255, 255, 255, 0.03);
+}
+
+/* StPageFlip applies classes depending on side; use them for realistic spine shadows */
+.page.--left {
+    border-right: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: inset -30px 0 60px rgba(0, 0, 0, 0.9), inset 1px 1px 5px rgba(255, 255, 255, 0.05);
+}
+
+.page.--right {
+    border-left: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: inset 30px 0 60px rgba(0, 0, 0, 0.9), inset -1px 1px 5px rgba(255, 255, 255, 0.05);
+}
+
+.page-content {
+    /* Generous luxury editorial margins */
+    padding: 4rem 3rem;
+    height: 100%;
+    position: relative;
+    overflow-y: auto;
+    /* Allow scrolling within page if masonry is long */
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    /* CRITICAL: allow vertical scrolling while letting flip capture horizontal */
+
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.page-content::-webkit-scrollbar {
+    display: none;
+}
+
+.style-label {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-family: var(--font-heading);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.back-to-cover-btn {
+    position: absolute;
+    top: 1.5rem;
+    left: 2rem;
+    background: transparent;
+    border: 1px solid rgba(201, 169, 110, 0.4);
+    color: var(--gold);
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.back-to-cover-btn:hover {
+    background: rgba(201, 169, 110, 0.1);
+    border-color: var(--gold);
+}
+
+/* Masonry Gallery inside Page */
+.masonry-gallery {
+    column-count: 2;
+    /* Default 2 columns for book page */
+    column-gap: 1.5rem;
+    padding-bottom: 5rem;
+    /* Increased space for absolute positioned page controls */
+    padding-top: 2rem;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.masonry-item img {
+    width: 100%;
+    display: block;
+    border: 1px solid #c9a96e;
+    padding: 4px;
+    background: #0f0f0f;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s ease;
+    will-change: transform;
+}
+
+.masonry-item:hover img {
+    transform: scale(1.03);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Spinner */
+.spinner-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(201, 169, 110, 0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .btn-luxury {
+        padding: 0.8rem 1.5rem;
+    }
+
+    .masonry-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-bottom: 4rem;
+    }
+
+    .masonry-item {
+        margin-bottom: 1rem;
+    }
+
+    .page-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+}
