@@ -35,6 +35,10 @@ body {
     display: none !important;
 }
 
+.mobile-swipe-hint {
+    display: none; /* Hidden by default on desktop */
+}
+
 /* Subtle Background Effect */
 .luxury-bg {
     position: fixed;
@@ -459,6 +463,35 @@ body {
     .page-title {
         font-size: 1.8rem;
         margin-bottom: 2rem;
+    }
+
+    .mobile-swipe-hint {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        color: var(--gold);
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.6;
+        animation: pulseFade 2s infinite ease-in-out;
+    }
+
+    .swipe-arrow {
+        font-size: 1.2rem;
+        animation: arrowSlide 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseFade {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.8; }
+    }
+
+    @keyframes arrowSlide {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
     }
 
     .footer-text {
