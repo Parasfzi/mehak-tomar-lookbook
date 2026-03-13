@@ -207,6 +207,8 @@ body {
     /* allow it to grow but not hit edges */
     margin: auto;
     will-change: transform; /* Hardware acceleration */
+    touch-action: none; /* Critical: Prevent browser from handling swipes */
+    user-select: none;
 }
 
 /* Hardcover Spine effect */
