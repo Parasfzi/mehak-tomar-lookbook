@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 coverPage.setAttribute('data-density', 'hard');
                 coverPage.innerHTML = `
                     <div class="page-content" style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; border: 1px solid rgba(201, 169, 110, 0.2); background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);">
-                        <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Mehak Tomar</div>
+                        <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Aria Thorne</div>
                         <h1 class="page-title" style="font-size: 4rem; margin-bottom: 0;">Lookbook</h1>
                         <div style="width: 50px; height: 1px; background: var(--gold); margin: 2rem auto;"></div>
                         <div style="font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Cinematic Portraits</div>
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         leftPage.className = 'page';
                         leftPage.innerHTML = `
                             <div class="page-content style-content" style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%;">
-                                <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Mehak Tomar</div>
+                                <div style="font-size: 0.8rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 2rem; text-transform: uppercase;">Aria Thorne</div>
                                 <h2 class="page-title" style="font-size: 3.5rem; margin-bottom: 2rem;">${style.title}</h2>
                                 <div style="width: 30px; height: 1px; background: var(--gold); margin: 0 auto 2rem auto;"></div>
                                 <div style="font-size: 0.8rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Style: ${style.slug}</div>
