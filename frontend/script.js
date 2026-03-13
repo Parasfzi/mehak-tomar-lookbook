@@ -47,6 +47,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <h1 class="page-title" style="font-size: 4rem; margin-bottom: 0;">Lookbook</h1>
                         <div style="width: 50px; height: 1px; background: var(--gold); margin: 2rem auto;"></div>
                         <div style="font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase;">Cinematic Portraits</div>
+                        
+                        <!-- Mobile Swipe Hint inside Book -->
+                        <div class="mobile-swipe-hint">
+                            <span class="swipe-arrow">←</span>
+                            <span class="swipe-text">Swipe to Browse</span>
+                            <span class="swipe-arrow">→</span>
+                        </div>
                     </div>
                     <div class="page-number">0</div>
                 `;
