@@ -54,6 +54,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 let pageNum = 1;
 
+                const isMobile = window.innerWidth < 768;
+
                 for (const style of styles) {
                     const imgRes = await fetch(`/api/styles/${style.slug}/images`);
                     const images = await imgRes.json();
@@ -85,9 +87,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                             if (img.aspectRatio === '9:16') { w = 900; h = 1600; }
                             if (img.aspectRatio === '4:5') { w = 1000; h = 1250; }
 
+                            // OPTIMIZATION: Resize images for mobile browsers using Cloudinary transformations
+                            let optimizedUrl = img.imageUrl;
+                            if (isMobile && optimizedUrl.includes('upload/')) {
+                                optimizedUrl = optimizedUrl.replace('upload/', 'upload/w_800,c_limit,q_auto,f_auto/');
+                            }
+
                             galleryHTML += `
                                 <a href="${img.imageUrl}" class="masonry-item" data-pswp-width="${w}" data-pswp-height="${h}" target="_blank">
-                                    <img src="${img.imageUrl}" alt="${style.title} Portrait" loading="lazy" />
+                                    <img src="${optimizedUrl}" alt="${style.title} Portrait" loading="lazy" />
                                 </a>
                             `;
                         });
