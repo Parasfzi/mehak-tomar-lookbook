@@ -150,9 +150,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 drawShadow: true,
                 maxShadowOpacity: 0.8,
                 showCover: true,
-                mobileScrollSupport: false, // Disable to prevent browser gesture interference
+                mobileScrollSupport: true,
                 usePortrait: true,
-                flippingTime: 800, // Faster flip for mobile snappiness
+                flippingTime: 1000,
                 swipeDistance: 30
             });
 
