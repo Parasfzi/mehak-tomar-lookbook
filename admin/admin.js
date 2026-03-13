@@ -314,15 +314,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.delete-img-btn').forEach(btn => {
             btn.addEventListener('click', async (e) => {
+                const btn = e.currentTarget;
                 if (!confirm('Delete this image?')) return;
-                const id = e.target.dataset.id;
+                const id = btn.dataset.id;
                 try {
-                    await fetch(`/api/images/${id}`, {
+                    const response = await fetch(`/api/images/${id}`, {
                         method: 'DELETE',
                         headers: { 'x-auth-token': localStorage.getItem('mt_admin_token') }
                     });
-                    e.target.closest('.image-card').remove();
-                } catch (err) { console.error(err); }
+                    
+                    if (response.ok) {
+                        btn.closest('.image-card').remove();
+                    } else {
+                        const data = await response.json();
+                        alert('Error deleting image: ' + (data.msg || 'Unknown error'));
+                    }
+                } catch (err) { 
+                    console.error(err);
+                    alert('Failed to connect to server for deletion.');
+                }
             });
         });
     }

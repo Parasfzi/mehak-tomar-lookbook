@@ -157,6 +157,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     opacity: 0;
+    z-index: 10;
     animation: fadeInFooter 1.5s ease-out 0.8s forwards;
 }
 
@@ -461,9 +462,10 @@ body {
 
     .footer-text {
         font-size: 0.6rem !important;
-        bottom: 1rem !important;
+        bottom: 5rem !important; /* Raised higher to avoid browser UI on mobile */
         letter-spacing: 1px !important;
         padding: 0 1rem;
+        z-index: 200; /* Above loader-view content if needed */
     }
 }
 
